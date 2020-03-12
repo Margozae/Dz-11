@@ -1,22 +1,20 @@
 'use strict';
 
-document.body.style.display = 'flex';
-for(let i=0; i < 5; i++) {  // eslint-disable-line 
-    const div = document.createElement('div');
-    document.body.append(div);
-    div.style.height = '80px';
-    div.style.width = '80px';
-    div.style.marginRight = '50px';
-    div.style.border = '1px solid #000000';
+const container = document.querySelector('.container');
+container.style.display = 'flex';
+const square = document.querySelectorAll('.square');
+const color = ['blue', 'green', 'yellow'];
 
-
-    
-    function counter() {
-        let color = ['blue', 'green', 'yellow'];
-        for (let i=0; i < Infinity; i++) {
-            div.style.background = color[i] ;
-        }
-    }
-    div.addEventListener('click', counter);
+for(let j = 0; j < square.length; j++ ) {
+    const colorSwitch = function () {
+        let i = 0;
+        return function () {
+            return square[j].style.background = color[i++];
+        };
+    };
+    const getClone = function () {
+        container.appendChild(square[j]);
+    };
+    square[j].addEventListener('click', getClone);
+    square[j].addEventListener('click', colorSwitch());
 }
-   // eslint-disable-line 
